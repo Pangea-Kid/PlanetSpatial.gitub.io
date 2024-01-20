@@ -1,7 +1,66 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <title>Live Server Sample</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: #333;
+            border: 1px solid #ddd;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            color: #007BFF;
+        }
+        p {
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        #mapid {
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+    <h1>PlanetSpatial.Org</h1>
+    <h2>About Being a Successful GIS Specialist</h2>
+    <p>
+        A successful GIS specialist combines technical skills with a deep understanding of spatial relationships. They are proficient in using GIS software to analyze and visualize data, and they often have a background in fields like geography, computer science, or environmental science.
+    </p>
+    <p>
+        To be successful in this role, a GIS specialist needs to be detail-oriented and have strong problem-solving skills. They must be able to work with large datasets and complex systems, and they often need to collaborate with other professionals to complete projects.
+    </p>
+    <p>
+        Continuous learning and staying updated with the latest GIS technologies and methodologies is also key to success in this field. This includes learning new programming languages, staying updated with the latest GIS software, and understanding how to apply GIS techniques to solve real-world problems.
+    </p>
+    <div id="mapid" style="height: 360px;"></div>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        var mymap = L.map('mapid').setView([51.505, -0.09], 13);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+            maxZoom: 19,
+        }).addTo(mymap);
+
+        var geojsonFeature = {
+            "type": "Feature",
+            "properties": {
+                "name": "Coors Field",
+                "amenity": "Baseball Stadium",
+                "popupContent": "This is where the Rockies play!"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [-104.99404, 39.75621]
+            }
+        };
+
+        L.geoJSON(geojsonFeature).addTo(mymap);
+    </script>
 </body>
 </html>
